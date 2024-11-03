@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="">
+  <meta name="keywords" content="PRS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Preference Guided Reflective Sampling for Aligning Language Models</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./prj_static/css/bulma.min.css">
+  <link rel="stylesheet" href="./prj_static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./prj_static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./prj_static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./prj_static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./prj_static/js/fontawesome.all.min.js"></script>
+  <script src="./prj_static/js/bulma-carousel.min.js"></script>
+  <script src="./prj_static/js/bulma-slider.min.js"></script>
+  <script src="./prj_static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero" style="margin-bottom: 0px;">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-3 publication-title">Preference Guided Reflective Sampling for Aligning<br>Language Models</br></h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://oceanypt.github.io/">Hai Ye<sup></sup></a> </span>
+              <span class="author-block", style="padding-left:30px">
+              <a href="https://scholar.google.com/citations?user=FABZCeAAAAAJ&hl=en">Hwee Tou Ng<sup></sup></a></span>
+              <span class="author-block", style="padding-left:30px">
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup></sup>Department of Computer Science, National University of Singapore</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2408.12163"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/nusnlp/PRS"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <center><img src="./images/rand_vs_prs.png" alt="Teaser" width="100%"></center>
+      <div class="content has-text-justified">
+        <strong>We propose a new method for data sampling to align language models.</strong> <strong>PRS</strong> adopts a tree-based generation framework that learns to adapt and adjust its outputs by reflecting on its already generated data. It can incorporate a specific user preference to optimize responses that align with it. Adjusting preferences will generate tailored responses. For random sampling, it generates samples independently and can use the best-of-N (BoN) method to find the best sample. Both methods share the same sampling budget, which samples the same number of responses for each prompt.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<hr>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Iterative data generation and model re-training can effectively align large language models (LLMs) to human preferences. The process of data sampling is crucial, as it significantly influences the success of policy improvement. Repeated random sampling is a widely used method that independently queries the model multiple times to generate outputs. In this work, we propose a more effective sampling method, named <b>Preference-Guided Reflective Sampling (PRS)</b>. Unlike random sampling, PRS employs a tree-based generation framework to enable more efficient sampling. It leverages adaptive self-refinement techniques to better explore the sampling space. By specifying user preferences in natural language, PRS can further optimize response generation according to these preferences. As a result, PRS can align models to diverse user preferences. Our experiments demonstrate that PRS generates higher-quality responses with significantly higher rewards. On AlpacaEval and Arena-Hard, PRS substantially outperforms repeated random sampling in best-of-N sampling. Moreover, PRS shows strong performance when applied in iterative offline RL training.
+          </p>
+        </div>
+      </div>
+    </div>
+
+</section>
+<hr>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+
+      <h2 class="title is-3">Background</h2>
+      <center><img src="./images/framework.png" alt="Teaser" width="100%"></center>
+      <div class="content has-text-justified">
+        Iterative data generation and model re-training can effectively align large language models (LLMs) to human preferences. The process of data sampling is crucial, as it significantly influences the success of policy improvement.
+      </div>
+      
+      <h2 class="title is-5">Best-of-N Sampling</h2>
+      <div class="content has-text-justified">
+        Best-of-N sampling (also known as Reject sampling) is a widely used data generation method. For a given prompt, Best-of-N sampling (BoN) generates N responses from the current model and then uses a trained reward model to select the response with the highest reward for the next round of training.
+      </div>
+
+
+      <h2 class="title is-5">Repeated Random Sampling</h2>
+      <div class="content has-text-justified">
+        <p>In the <strong>Best-of-N</strong> setting, <strong>Random sampling (Rand)</strong> is a commonly used and straightforward sampling method. Random sampling generates N independent responses in parallel and uses temperature sampling to control diversity in the generated outputs.</p>
+    
+        <p>Although random sampling is simple and effective, it has two main drawbacks:</p>
+    
+        <ol>
+            <li><strong>Low sampling efficiency</strong>: Each response is generated independently, meaning new responses cannot learn from previous samples. This affects the quality of responses and limits improvements in sampling efficiency.</li>
+            
+            <li><strong>Lack of preference consideration</strong>: The goal of language model alignment is to generate responses that match user preferences, yet random sampling does not take user preferences into account during generation. As a result, the responses generated may fail to meet the diverse needs of different users.</li>
+        </ol>
+    </div>
+  
+  </div>
+  </div>
+</section>
+<hr>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+
+      <h2 class="title is-3">Method</h2>
+      <center><img src="./images/prs-3(1).png" alt="Teaser" width="100%"></center>
+     
+
+      <div class="content has-text-justified">
+        <p>We propose a new sampling method named <strong><em>Preference Guided Reflective Sampling (PRS)</em></strong>. <strong><em>PRS</em></strong> adopts a tree-based generation framework that learns to adapt and adjust its outputs by reflecting on its already generated data. It can incorporate a specific user preference to optimize responses that align with it. Adjusting preferences will generate tailored responses.</p>
+
+        <p>Specifically, for a given prompt <code>x</code> and user preference <code>z</code>, <em>PRS</em> enables the model <code>p</code> to generate <code>N</code> responses. <em>PRS</em> employs a tree structure for sampling, which can have multiple layers, each with a corresponding width. For simplicity, <em>PRS</em> defaults to a two-layer structure, with each layer having a width of <code>N/2</code>. Additionally, <em>PRS</em> uses a pre-trained reward model <code>R(x, z, y)</code> to score the generated responses.</p>
+
+        <ol>
+        <li><strong>First Layer</strong>: Using random sampling, generate <code>N/2</code> responses, denoted as <code>𝒀₀</code>, based on <code>y₀ ∼ p(⋅ | x, z)</code>.</li>
+        <li>Use the reward model to score each response in <code>𝒀₀</code>, selecting the response with the highest reward <code>y₀*</code>.</li>
+        <li>The model then performs self-reflection based on <code>y₀*</code>, evaluating if <code>y₀*</code> aligns with the given preference <code>z</code> and generating corresponding feedback <code>f</code>.</li>
+        <li><strong>Second Layer</strong>: Based on <code>y₁ ∼ p(⋅ | x, z, y₀*, f)</code>, use random sampling again to generate <code>N/2</code> improved responses, denoted as <code>𝒀₁</code>.</li>
+        <li>Score each response in <code>𝒀₁</code> using the reward model.</li>
+        <li>Finally, combine <code>𝒀₀</code> and <code>𝒀₁</code>, returning the response with the highest reward among them.</li>
+        </ol>
+      </div>
+
+  </div>
+  </div>
+</section>
+<hr>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+
+      <h2 class="title is-3">Results</h2>
+      <div class="content has-text-justified">
+        In the experiment, we compared the effectiveness of different methods in two aspects: data sampling and adaptation to user preferences.
+        
+        <p><strong>Comparison of Data Sampling Methods:</strong></p>
+        <ol>
+        <li><strong>Rand</strong>: This is the random sampling method.</li>
+        <li><strong>PRand</strong>: This builds on random sampling by incorporating user preference <code>z</code> into the input prompt.</li>
+        <li><strong>Greedy</strong>: The model iteratively modifies the response with the highest current reward.</li>
+        <li><strong>PRS</strong>: The newly proposed method.</li>
+        </ol>
+      </div>
+      
+      <h2 class="title is-5">Results of Best-of-N sampling on AlpacaEval and Arena-Hard</h2>
+      <center><img src="./images/result_BoN.png" alt="Teaser" width="100%"></center>
+      <div class="content has-text-justified">
+        <p>We conducted best-of-N sampling experiments on <strong>AlpacaEval</strong> and <strong>Arena-Hard</strong>, where, for the same prompt, we used both random sampling and <em>PRS</em> to generate <code>N</code> responses, retaining the response with the highest reward score.</p>
+
+        <p>We tested different language models for sampling: <code>Mistral-7b-instruct-v0.2</code>, <code>Mistral-large-2407</code>, <code>Llama-3-8b-instruct</code>, <code>Llama-3.1-70b-instruct</code>, <code>Gemma-2-9b-it</code>, and <code>Qwen2-72b-instruct</code>. We use <code>ArmoRM-Llama3-8B-v0.1</code> as the reward model. </p>
+    
+        <p>We first present the baseline results of different models on <strong>AlpacaEval v2.0</strong> and <strong>Arena-Hard v0.1</strong>. We found that sampling multiple responses and selecting the best one significantly improves model performance. Furthermore, compared to random sampling, <em>PRS</em> consistently shows performance gains in both best-of-16 and best-of-32 settings. This experimental result demonstrates that <strong>PRS outperforms random sampling in best-of-N sampling.</strong></p>
+    </div>
+    
+  
+      <h2 class="title is-5">Comparison of Sampling Results</h2>
+      <center><img src="./images/prs-4(1).png" alt="Teaser" width="100%"></center>
+      <div class="content has-text-justified">
+        <p>We further compared the reward values of responses generated by different methods at varying sample sizes.</p>
+    
+        <p>Under different sample sizes, we examined the reward values of responses generated by each sampling method. For <em>PRS</em>, we considered the impact of different tree structure widths and whether feedback was generated. <code>w/o f</code> denotes no feedback generation. Here, we used <strong>AlpacaEval</strong> prompts to generate responses and <code>UltraRM-13b</code> as the reward function.</p>
+    
+        <p><em>PRS</em> (<code>N/2, N/2</code>) and <em>PRS</em> (<code>N/2, N/2</code>) <code>w/o f</code> achieved superior results. We found that <em>PRS</em> demonstrated higher sampling efficiency compared to other methods: at the same sample size, <em>PRS</em> achieved higher reward values; and to reach the same reward value, <em>PRS</em> required less computation. Therefore, <strong>PRS is a more compute-optimal method.</strong></p>
+    </div>
+
+
+    <h2 class="title is-5">Preference Adaptation</h2>
+      <center><img src="./images/preference_adapt.png" alt="Teaser" width="100%"></center>
+      <div class="content has-text-justified">
+        <p>We further compared the effectiveness of <em>PRS</em> in adapting to user preferences (Adaptation) and evaluated the following methods:</p>
+    
+        <p>We first used these three methods to align a large language model. The specific process is as follows: we used each method to generate data, and then used the generated data to align the language model. This process was repeated three times. During data generation, we accounted for user preferences by pre-labeling each prompt in the training data with different user preferences. For details on the labeling process, please refer to the paper. For data generated by <em>PRand</em> and <em>PRS</em>, we trained the model using a function of the form <code>p(y|x,z)</code>, while <em>Rand</em> used the training method <code>p(y|x)</code>.</p>
+    
+        <p>After obtaining the aligned models, we tested five different user preferences. For each test prompt, we appended a user preference description and then input it into the model to generate a corresponding response, i.e., <code>y ∼ p(⋅ | x, z)</code>. We used <strong>GPT-4</strong> for automatic evaluation to determine which response better matched the user preference. Results indicated that <em>PRS</em> had better adaptability than <em>Rand</em> and <em>PRand</em>, confirming that <strong>PRS enables more precise personalized alignment</strong>. Additionally, we found that <em>PRand</em> is a strong baseline method—simply appending a preference directive after the prompt can yield effective personalized outputs.</p>
+    </div>
+    
+
+  </div>
+  </div>
+</section>
+<hr>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{hai_prs_emnlp,
+      author = {Ye, Hai and Ng, Hwee You},
+      booktitle = {Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+      title = {Preference-Guided Reflective Sampling for Aligning Language Models},
+      url = {https://arxiv.org/pdf/2408.12163},
+      year = {2024}}
+    </code></pre>
+  </div>
+</section>
+<hr>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p style="text-align:right;font-size:small;">
+          <a href="https://github.com/nerfies/nerfies.github.io">
+            This guy makes a nice webpage.
+          </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
