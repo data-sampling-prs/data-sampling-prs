@@ -6,7 +6,7 @@
         content="">
   <meta name="keywords" content="PRS">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Preference Guided Reflective Sampling for Aligning Language Models</title>
+  <title>Preference-Guided Reflective Sampling for Aligning Language Models</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -32,7 +32,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-3 publication-title">Preference Guided Reflective Sampling for Aligning<br>Language Models</br></h1>
+          <h1 class="title is-3 publication-title">Preference-Guided Reflective Sampling for Aligning<br>Language Models</br></h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://oceanypt.github.io/">Hai Ye<sup></sup></a> </span>
@@ -64,6 +64,15 @@
                       <i class="fab fa-github"></i>
                   </span>
                   <span>Code</span>
+                  </a>
+              </span>
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/oceanpty/alpaca_user_preference"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
                   </a>
               </span>
 
@@ -155,7 +164,7 @@
      
 
       <div class="content has-text-justified">
-        <p>We propose a new sampling method named <strong><em>Preference Guided Reflective Sampling (PRS)</em></strong>. <strong><em>PRS</em></strong> adopts a tree-based generation framework that learns to adapt and adjust its outputs by reflecting on its already generated data. It can incorporate a specific user preference to optimize responses that align with it. Adjusting preferences will generate tailored responses.</p>
+        <p>We propose a new sampling method named <strong><em>Preference-Guided Reflective Sampling (PRS)</em></strong>. <strong><em>PRS</em></strong> adopts a tree-based generation framework that learns to adapt and adjust its outputs by reflecting on its already generated data. It can incorporate a specific user preference to optimize responses that align with it. Adjusting preferences will generate tailored responses.</p>
 
         <p>Specifically, for a given prompt <code>x</code> and user preference <code>z</code>, <em>PRS</em> enables the model <code>p</code> to generate <code>N</code> responses. <em>PRS</em> employs a tree structure for sampling, which can have multiple layers, each with a corresponding width. For simplicity, <em>PRS</em> defaults to a two-layer structure, with each layer having a width of <code>N/2</code>. Additionally, <em>PRS</em> uses a pre-trained reward model <code>R(x, z, y)</code> to score the generated responses.</p>
 
